@@ -32,15 +32,15 @@ target_include_directories(alglib_shared PUBLIC ${ALGLIB_INCLUDE_DIR})
 add_library(alglib::shared ALIAS alglib_shared)
 
 
-# Enable testing for the project
-enable_testing()
-
-# List of test names
-set(ALGLIB_TESTS c i x xpart0)
-
 # Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     message(STATUS "CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same. Tests will be added.")
+
+    # Enable testing for the project
+    enable_testing()
+
+    # List of test names
+    set(ALGLIB_TESTS c i x xpart0)
 
     # Add executables and tests for each test file
     foreach(ALGLIB_TEST_NAME ${ALGLIB_TESTS})
@@ -53,8 +53,12 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         # Link the static library
         target_link_libraries(alglib_test_${ALGLIB_TEST_NAME} PRIVATE alglib::static)
 
-        # Define the required macro
-        target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4POSIX)
+        # Define the required macro based on the operating system
+        if(WIN32)
+            target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4WINDOWS)
+        else()
+            target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4POSIX)
+        endif()
 
         # Register the test with CTest
         add_test(
