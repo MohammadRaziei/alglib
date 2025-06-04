@@ -32,33 +32,42 @@ target_include_directories(alglib_shared PUBLIC ${ALGLIB_INCLUDE_DIR})
 add_library(alglib::shared ALIAS alglib_shared)
 
 
-# Add test executable
-# List of test files and their corresponding executable names
-set(ALGLIB_TEST_FILES
-    test_c test_i test_x test_xpart0
-)
+# Enable testing for the project
+enable_testing()
 
-# Add executables for each test file
-foreach(ALGLIB_TEST_NAME ${ALGLIB_TEST_FILES})
-    # Define the source file path
-    set(ALGLIB_TEST_SOURCE "${PROJECT_SOURCE_DIR}/tests/${ALGLIB_TEST_NAME}.cpp")
+# List of test names
+set(ALGLIB_TESTS c i x xpart0)
 
-    # Add the executable
-    add_executable(alglib_${ALGLIB_TEST_NAME} ${ALGLIB_TEST_SOURCE})
+# Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
+if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+    message(STATUS "CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same. Tests will be added.")
 
-    # Link the static library
-    target_link_libraries(alglib_${ALGLIB_TEST_NAME} PRIVATE alglib::static)
+    # Add executables and tests for each test file
+    foreach(ALGLIB_TEST_NAME ${ALGLIB_TESTS})
+        # Define the source file path
+        set(ALGLIB_TEST_SOURCE "${PROJECT_SOURCE_DIR}/tests/test_${ALGLIB_TEST_NAME}.cpp")
 
-    # Define the required macro
-    target_compile_definitions(alglib_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4POSIX)
+        # Add the executable
+        add_executable(alglib_test_${ALGLIB_TEST_NAME} ${ALGLIB_TEST_SOURCE})
 
-    # Print a status message
-    message(STATUS "Test executable 'alglib_${ALGLIB_TEST_NAME}' has been added.")
-endforeach()
+        # Link the static library
+        target_link_libraries(alglib_test_${ALGLIB_TEST_NAME} PRIVATE alglib::static)
 
-# target_compile_definitions(alglib_test_xne PRIVATE AE_NO_EXCEPTIONS AE_THREADING=AE_SERIAL_UNSAFE)
+        # Define the required macro
+        target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4POSIX)
 
-message(STATUS "Test executable 'tests' has been added.")
+        # Register the test with CTest
+        add_test(
+            NAME alglib_test_${ALGLIB_TEST_NAME}
+            COMMAND alglib_test_${ALGLIB_TEST_NAME}
+        )
+
+        # Print a status message
+        message(STATUS "Test executable 'alglib_test_${ALGLIB_TEST_NAME}' has been added.")
+    endforeach()
+else()
+    message(WARNING "CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are different. Skipping test setup.")
+endif()
 
 
 # Install targets
