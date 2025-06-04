@@ -137,3 +137,5 @@ compile_commands.json
 vcpkg/
 vcpkg.exe
 vcpkg.cache
+
+Testing/
