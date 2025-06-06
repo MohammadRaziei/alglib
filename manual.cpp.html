@@ -1,6 +1,6 @@
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css">
     <style type="text/css">
         body {
             background-color: #f5f5f5;
@@ -110,13 +110,29 @@
     } */
 
         .pre-code {
-            background: #e5e5e5;
+            background: #2e2e2e;
             padding: 10px;
-            /* color: #f8f8f2; */
+            color: #f8f8f2;
+            /* font-size: 500%; */
+        }
+        pre.p_code_head {
+            background: #222;
+            padding: 10px;
+            color: #f8f8f2;
+            /* font-size: 500%; */
         }
         code {
+            /* background: #e5e5e5; */
+            font-size: 125%;
+        }
+
+        li code, p > code, body > code {
             background: #e5e5e5;
-            padding:3px;
+            border-radius: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
 
         .p_code_head {
@@ -150,7 +166,7 @@
 
     <!-- Code processing script -->
     <script>
-
+        
         document.addEventListener('DOMContentLoaded', function () {
             // Process all code blocks after slight delay to ensure Prism is loaded
             setTimeout(function () {
@@ -160,15 +176,14 @@
                     if (el.getElementsByTagName("a").length > 0) {
                         return;
                     }
-                    el.classList.add('pre-code');
                     if (el.classList.contains('p_code_head')) {
                         return;
                     }
+                    el.classList.add('pre-code');
 
                     // Move content into new structure
                     const text = el.innerHTML.replace(/<[^>]*>/g, '');
-                    if (text.startsWith('&gt;')) {
-                        console.log(1);
+                    if (['&gt;', '>'].some(prefix => text.startsWith(prefix))) {                       
                         return;
                     }
 
@@ -180,7 +195,7 @@
                     el.appendChild(code);
                 });
 
-                const codes = document.querySelectorAll('code');
+                const codes = document.querySelectorAll('pre code');
 
 
                 codes.forEach(function (code) {
@@ -188,7 +203,7 @@
                 });
 
 
-            }, 200);
+            }, 100);
         });    
     </script>
 </head>
