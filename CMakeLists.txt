@@ -28,6 +28,13 @@ else()
 endif()  
 
 target_include_directories(alglib PUBLIC ${ALGLIB_INCLUDE_DIR})
+# Define the required macro based on the operating system
+if(WIN32)
+    target_compile_definitions(alglib PRIVATE AE_OS=AE_WINDOWS)
+else()
+    target_compile_definitions(alglib PRIVATE AE_OS=AEـPOSIX)
+endif()
+
 
 # Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
