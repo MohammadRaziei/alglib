@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALGLIB Unofficial Distribution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        
+        .code-block {
+            border-radius: 0.5rem;
+            background: #282c34;
+            font-size: 0.9rem;
+        }
+        
+        .hljs {
+            background: #0d1117 !important;
+            border-radius: 0.5rem;
+        }
+        
+        .release-card {
+            transition: all 0.3s ease;
+        }
+        
+        .release-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <img src="https://www.alglib.net/img/logo_3cubes.png" alt="ALGLIB Logo" class="h-12 mr-4">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold">ALGLIB Unofficial</h1>
+                        <p class="text-blue-100 text-sm">Enhanced Distribution for Numerical Computing</p>
+                    </div>
+                </div>
+                <nav class="flex flex-wrap gap-4 md:gap-6">
+                    <a href="#features" class="hover:text-blue-200 transition duration-300 font-medium">Features</a>
+                    <a href="#releases" class="hover:text-blue-200 transition duration-300 font-medium">Downloads</a>
+                    <a href="#usage" class="hover:text-blue-200 transition duration-300 font-medium">Usage</a>
+                    <a href="#about" class="hover:text-blue-200 transition duration-300 font-medium">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Enhanced ALGLIB Distribution</h1>
+                <p class="text-xl md:text-2xl mb-8 leading-relaxed opacity-90">
+                    An optimized distribution of the powerful ALGLIB numerical library featuring modern build system support, pre-compiled binaries, and enhanced documentation.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                    <a href="https://github.com/mohammadraziei/ALGLIB" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-50 transition duration-300 flex items-center glow-on-hover shadow-md">
+                        <i class="fab fa-github mr-3 text-xl"></i> GitHub Repository
+                    </a>
+                    <a href="#releases" class="bg-blue-400 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-500 transition duration-300 flex items-center glow-on-hover shadow-md">
+                        <i class="fas fa-download mr-3 text-xl"></i> Download Releases
+                    </a>
+                    <a href="manual.cpp.html" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-600 transition duration-300 flex items-center glow-on-hover">
+                        <i class="fas fa-book mr-3 text-xl"></i> Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Banner -->
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4">
+        <div class="container mx-auto px-4 flex items-start">
+            <div class="flex-shrink-0 pt-1">
+                <i class="fas fa-exclamation-triangle text-xl mr-3"></i>
+            </div>
+            <div>
+                <p class="font-bold">Important Notice</p>
+                <p>This is an unofficial distribution of ALGLIB. For the official version, please visit <a href="https://www.alglib.net/" class="text-yellow-700 underline hover:text-yellow-900 font-medium">the official website</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-semibold">WHY CHOOSE THIS DISTRIBUTION</span>
+                <h2 class="text-4xl font-bold mt-2">Enhanced Developer Experience</h2>
+                <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+                    Modern build system support and pre-compiled binaries to accelerate your development workflow
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="text-blue-600 mb-5">
+                        <i class="fas fa-cubes text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">CMake Integration</h3>
+                    <p class="text-gray-600">
+                        Full CMake support with modern CMakeLists.txt configuration for easy cross-platform building
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="text-blue-600 mb-5">
+                        <i class="fas fa-project-diagram text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">QMake Support</h3>
+                    <p class="text-gray-600">
+                        Ready-to-use QMake project files for Qt developers with seamless integration
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="text-blue-600 mb-5">
+                        <i class="fas fa-box-open text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pre-compiled Binaries</h3>
+                    <p class="text-gray-600">
+                        Ready-to-use libraries for Windows, Linux, and macOS to jumpstart your projects
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="text-blue-600 mb-5">
+                        <i class="fas fa-file-alt text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Updated Documentation</h3>
+                    <p class="text-gray-600">
+                        Enhanced manual.cpp.html with improved navigation and additional examples
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="text-blue-600 mb-5">
+                        <i class="fas fa-tags text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Version Management</h3>
+                    <p class="text-gray-600">
+                        Proper Git version tagging for reliable dependency management
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="text-blue-600 mb-5">
+                        <i class="fas fa-code-branch text-5xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Unmodified Source</h3>
+                    <p class="text-gray-600">
+                        Original ALGLIB code preserved with only build system enhancements added
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Releases Section -->
+    <section id="releases" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-semibold">DOWNLOAD</span>
+                <h2 class="text-4xl font-bold mt-2">Pre-compiled Releases</h2>
+                <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+                    Ready-to-use binaries for popular platforms to accelerate your development
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Windows Release -->
+                <div class="release-card bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:border-blue-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-blue-600 mr-3 bg-blue-50 p-3 rounded-full">
+                            <i class="fab fa-windows text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Windows</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Pre-compiled libraries for Windows (32/64-bit)</p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://github.com/mohammadraziei/ALGLIB/releases" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-download mr-2"></i> Download
+                        </a>
+                        <span class="text-sm text-gray-500">DLL & Static</span>
+                    </div>
+                </div>
+                
+                <!-- Linux Release -->
+                <div class="release-card bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:border-blue-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-blue-600 mr-3 bg-blue-50 p-3 rounded-full">
+                            <i class="fab fa-linux text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Linux</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Compiled binaries for various Linux distributions</p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://github.com/mohammadraziei/ALGLIB/releases" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-download mr-2"></i> Download
+                        </a>
+                        <span class="text-sm text-gray-500">.so & .a</span>
+                    </div>
+                </div>
+                
+                <!-- MacOS Release -->
+                <div class="release-card bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:border-blue-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-blue-600 mr-3 bg-blue-50 p-3 rounded-full">
+                            <i class="fab fa-apple text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">macOS</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Universal binaries for macOS (Intel/Apple Silicon)</p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://github.com/mohammadraziei/ALGLIB/releases" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm">
+                            <i class="fas fa-download mr-2"></i> Download
+                        </a>
+                        <span class="text-sm text-gray-500">.dylib</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 mb-4">For all releases and detailed version information:</p>
+                <a href="https://github.com/mohammadraziei/ALGLIB/releases" class="inline-flex items-center bg-gray-800 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-700 transition duration-300 shadow-md">
+                    <i class="fab fa-github mr-2 text-xl"></i> View All Releases on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-semibold">GET STARTED</span>
+                <h2 class="text-4xl font-bold mt-2">Integration Guide</h2>
+                <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+                    Quick start instructions for integrating ALGLIB into your projects
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-sm border border-gray-200 mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600 flex items-center">
+                        <i class="fas fa-terminal mr-3"></i> Using with CMake
+                    </h3>
+                    <pre class="rounded-lg overflow-hidden"><code class="language-bash">
+# Clone the repository
+git clone https://github.com/mohammadraziei/ALGLIB.git
+cd ALGLIB
+
+# Configure with CMake (out-of-source build recommended)
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+
+# Build the library
+cmake --build . --config Release
+
+# Install system-wide (optional)
+sudo cmake --install .
+                    </code></pre>
+                    <p class="text-gray-600 mt-4">Then in your project's CMakeLists.txt:</p>
+                    <pre class="rounded-lg overflow-hidden mt-2"><code class="language-cmake">
+find_package(ALGLIB REQUIRED)
+target_link_libraries(your_target PRIVATE ALGLIB::ALGLIB)
+                    </code></pre>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600 flex items-center">
+                        <i class="fab fa-qtx mr-3"></i> Using with QMake
+                    </h3>
+                    <p class="text-gray-600 mb-4">QMake project files are located in the <code class="bg-gray-200 px-2 py-1 rounded text-sm">qmake</code> directory.</p>
+                    <pre class="rounded-lg overflow-hidden"><code class="language-bash">
+# Option 1: Open the .pro file in Qt Creator
+# Option 2: Build from command line:
+qmake alglib.pro
+make -j$(nproc)
+                    </code></pre>
+                    <p class="text-gray-600 mt-4">Include in your Qt project:</p>
+                    <pre class="rounded-lg overflow-hidden mt-2"><code class="language-qmake">
+# In your .pro file
+include(/path/to/alglib.pri)
+LIBS += -lalglib
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold">ABOUT</span>
+                    <h2 class="text-4xl font-bold mt-2">Project Overview</h2>
+                    <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+                        An unofficial distribution focused on developer experience
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-600">Unofficial ALGLIB Distribution</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        This project provides an enhanced distribution of the ALGLIB numerical library, designed to improve developer workflow and integration. The original ALGLIB source code remains completely unmodified - this distribution focuses solely on build system improvements and packaging enhancements.
+                    </p>
+                    
+                    <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-600">Key Enhancements</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li><strong>Modern CMake support</strong> for easy integration into existing projects</li>
+                        <li><strong>QMake project files</strong> for Qt developers</li>
+                        <li><strong>Pre-compiled binaries</strong> for faster project setup</li>
+                        <li><strong>Improved documentation</strong> with better navigation</li>
+                        <li><strong>Versioned releases</strong> following semantic versioning</li>
+                        <li><strong>Cross-platform support</strong> for Windows, Linux, and macOS</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-600">Project Goals</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        The primary goal is to provide a standardized, reliable distribution of ALGLIB that integrates seamlessly with modern development workflows. This project makes no claims about improving the numerical algorithms themselves, but rather focuses on making this excellent library easier to use in contemporary development environments.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Links Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-semibold">RESOURCES</span>
+                <h2 class="text-4xl font-bold mt-2">Additional Resources</h2>
+                <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+                    Everything you need to work with ALGLIB
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- ALGLIB Official -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md border border-blue-200 text-center hover:shadow-lg transition-shadow">
+                    <div class="text-blue-600 mb-4 inline-flex justify-center items-center w-16 h-16 bg-blue-50 rounded-full mx-auto">
+                        <i class="fas fa-external-link-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Official ALGLIB Website</h3>
+                    <p class="text-gray-600 mb-4">The original source and official documentation</p>
+                    <a href="https://www.alglib.net/" class="inline-flex items-center bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm">
+                        <i class="fas fa-globe mr-2"></i> Visit Site
+                    </a>
+                </div>
+                
+                <!-- Manual Page -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md border border-blue-200 text-center hover:shadow-lg transition-shadow">
+                    <div class="text-blue-600 mb-4 inline-flex justify-center items-center w-16 h-16 bg-blue-50 rounded-full mx-auto">
+                        <i class="fas fa-book text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Enhanced Documentation</h3>
+                    <p class="text-gray-600 mb-4">Updated manual with improved navigation</p>
+                    <a href="manual.cpp.html" class="inline-flex items-center bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm">
+                        <i class="fas fa-file-alt mr-2"></i> View Docs
+                    </a>
+                </div>
+                
+                <!-- GitHub Repo -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md border border-blue-200 text-center hover:shadow-lg transition-shadow">
+                    <div class="text-blue-600 mb-4 inline-flex justify-center items-center w-16 h-16 bg-blue-50 rounded-full mx-auto">
+                        <i class="fab fa-github text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">GitHub Repository</h3>
+                    <p class="text-gray-600 mb-4">Source code, issues, and releases</p>
+                    <a href="https://github.com/mohammadraziei/ALGLIB" class="inline-flex items-center bg-gray-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-700 transition duration-300 shadow-sm">
+                        <i class="fab fa-github mr-2"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white pt-12 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="https://www.alglib.net/img/logo_3cubes.png" alt="ALGLIB Logo" class="h-10 mr-3">
+                        <h3 class="text-xl font-bold">ALGLIB Unofficial</h3>
+                    </div>
+                    <p class="mt-3 text-blue-200 max-w-md">
+                        An enhanced distribution of the ALGLIB numerical library for modern development workflows.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://github.com/mohammadraziei/ALGLIB" class="text-white hover:text-blue-200 text-xl transition duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-blue-200 text-center md:text-right">
+                        ALGLIB is Copyright © 1994-2023. This is an unofficial distribution.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-400 pt-6 text-center text-blue-200 text-sm">
+                <p>This distribution is not affiliated with the official ALGLIB project. All original ALGLIB code remains copyright of its authors.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hidden transition duration-300 hover:bg-blue-700 flex items-center justify-center">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Initialize highlight.js
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without jumping
+                    if (history.pushState) {
+                        history.pushState(null, null, targetId);
+                    } else {
+                        location.hash = targetId;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
