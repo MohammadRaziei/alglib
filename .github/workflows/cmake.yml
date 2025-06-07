@@ -42,7 +42,7 @@ jobs:
 
       # Step 5: Install the project
       - name: Install project
-        run: cmake --install build --prefix install
+        run: cmake --install build --prefix build/install
 
       # Step 6: Zip the installed files
       - name: Create ZIP archive
