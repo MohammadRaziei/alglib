@@ -49,12 +49,7 @@ jobs:
       # Step 6: Zip the installed files
       - name: Create ZIP archive
         run: |
-          cd build/install
-          if [[ "${{ runner.os }}" == "Windows" ]]; then
-            powershell Compress-Archive -Path * -DestinationPath alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip
-          else
             zip -r alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip .
-          fi
         shell: bash # Use bash for Linux/macOS
 
       # Step 7: Upload artifact
