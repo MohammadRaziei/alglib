@@ -41,8 +41,7 @@ else()
 endif()
 
 
-# Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
-if(PROJECT_IS_TOP_LEVEL and ENABLE_TESTING)
+if(PROJECT_IS_TOP_LEVEL AND ENABLE_TESTING)
     message(STATUS "ALGLIB tests will be added.")
 
     # Enable testing for the project
