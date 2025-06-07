@@ -22,9 +22,10 @@ jobs:
 
       # Step 2: Set up CMake
       - name: Install CMake
-        uses: lukka/run-cmake@v10
-        with:
-          cmakeVersion: "3.27" # Specify the desired CMake version
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake
+
 
       # Step 3: Configure CMake
       - name: Configure CMake
