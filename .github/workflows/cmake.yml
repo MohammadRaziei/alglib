@@ -35,6 +35,8 @@ jobs:
           else
             cmake . -B build -DALGLIB_STATIC_LIBRARY=ON
           fi
+        shell: bash # Use bash for all platforms
+
 
       # Step 4: Build the project
       - name: Build project
@@ -88,6 +90,7 @@ jobs:
             echo "RELEASE_NAME=__beta__" >> $GITHUB_ENV
             echo "IS_TAG=false" >> $GITHUB_ENV
           fi
+        shell: bash # Use bash for all platforms
 
       # Step 4: Create or update release
       - name: Create or update release
