@@ -18,18 +18,14 @@ file(GLOB ALGLIB_SOURCES "${ALGLIB_SOURCE_DIR}/*.cpp")
 file(GLOB ALGLIB_HEADERS "${ALGLIB_INCLUDE_DIR}/*.h")
 
 # Create a static library target
-add_library(alglib_static STATIC ${ALGLIB_SOURCES})
-target_include_directories(alglib_static PUBLIC ${ALGLIB_INCLUDE_DIR})
+if (DEFINED ALGLIB_SHARED_LIBRARY)
+    add_library(alglib SHARED ${ALGLIB_SOURCES})
+else()
+    set(ALGELIB_STATIC_LIBRARY)
+    add_library(alglib STATIC ${ALGLIB_SOURCES})
+endif()  
 
-# Create an alias for the static library
-add_library(alglib::static ALIAS alglib_static)
-
-# Create a shared library target
-add_library(alglib_shared SHARED ${ALGLIB_SOURCES})
-target_include_directories(alglib_shared PUBLIC ${ALGLIB_INCLUDE_DIR})
-
-# Create an alias for the shared library
-add_library(alglib::shared ALIAS alglib_shared)
+target_include_directories(alglib PUBLIC ${ALGLIB_INCLUDE_DIR})
 
 
 # Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
@@ -51,7 +47,7 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         add_executable(alglib_test_${ALGLIB_TEST_NAME} ${ALGLIB_TEST_SOURCE})
 
         # Link the static library
-        target_link_libraries(alglib_test_${ALGLIB_TEST_NAME} PRIVATE alglib::static)
+        target_link_libraries(alglib_test_${ALGLIB_TEST_NAME} PRIVATE alglib)
 
         # Define the required macro based on the operating system
         if(WIN32)
@@ -75,16 +71,18 @@ endif()
 
 
 # Install targets
-install(TARGETS alglib_static
-    ARCHIVE DESTINATION lib
-    INCLUDES DESTINATION include
-)
-
-install(TARGETS alglib_shared
-    LIBRARY DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
-)
+if (DEFINED ALGLIB_SHARED_LIBRARY)
+    install(TARGETS alglib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+    )
+else()
+    install(TARGETS alglib
+        ARCHIVE DESTINATION lib
+        INCLUDES DESTINATION include
+    )
+endif()
 
 install(DIRECTORY ${ALGLIB_INCLUDE_DIR}/ DESTINATION include)
 
