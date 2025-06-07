@@ -1,0 +1,105 @@
+name: Build and Release ALGLIB
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+    tags:
+      - "v*" # Trigger on version tags (e.g., v1.0.0)
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        library_type: [static, shared]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up CMake
+      - name: Install CMake
+        uses: lukka/run-cmake@v10
+        with:
+          cmakeVersion: "3.27" # Specify the desired CMake version
+
+      # Step 3: Configure CMake
+      - name: Configure CMake
+        run: |
+          mkdir build && cd build
+          if [[ "${{ matrix.library_type }}" == "shared" ]]; then
+            cmake .. -DALGLIB_SHARED_LIBRARY=ON
+          else
+            cmake .. -DALGLIB_STATIC_LIBRARY=ON
+          fi
+
+      # Step 4: Build the project
+      - name: Build project
+        working-directory: build
+        run: cmake --build . --config Release
+
+      # Step 5: Install the project
+      - name: Install project
+        working-directory: build
+        run: cmake --install . --prefix install
+
+      # Step 6: Zip the installed files
+      - name: Create ZIP archive
+        run: |
+          cd build/install
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            powershell Compress-Archive -Path * -DestinationPath alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip
+          else
+            zip -r alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip .
+          fi
+        shell: bash # Use bash for Linux/macOS
+
+      # Step 7: Upload artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: alglib-${{ matrix.os }}-${{ matrix.library_type }}
+          path: build/install/alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Download all artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release
+
+      # Step 3: Determine release type
+      - name: Determine release type
+        id: release_type
+        run: |
+          if [[ "${{ github.ref }}" =~ ^refs/tags/v.*$ ]]; then
+            echo "RELEASE_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+            echo "IS_TAG=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_NAME=__beta__" >> $GITHUB_ENV
+            echo "IS_TAG=false" >> $GITHUB_ENV
+          fi
+
+      # Step 4: Create or update release
+      - name: Create or update release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_NAME }}
+          name: Release ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: ${{ env.IS_TAG == 'false' }}
+          files: |
+            release/**/alglib-*.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
