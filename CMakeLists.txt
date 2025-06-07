@@ -1,6 +1,8 @@
 # Specify the minimum required version of CMake
 cmake_minimum_required(VERSION 3.15)
 
+option(ENABLE_TESTING "Enable testing for the project" ON)
+
 # Define the project name, version, and language
 project(ALGLIB VERSION 4.0.4 LANGUAGES CXX)
 
@@ -27,10 +29,21 @@ endif()
 
 target_include_directories(alglib PUBLIC ${ALGLIB_INCLUDE_DIR})
 
-
 # Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
-    message(STATUS "CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same. Tests will be added.")
+    # Set a variable to indicate that the project is top-level
+    set(PROJECT_IS_TOP_LEVEL TRUE CACHE INTERNAL "Indicates if the project is top-level")
+    message(STATUS "Project is top-level.")
+else()
+    # Set a variable to indicate that the project is not top-level
+    set(PROJECT_IS_TOP_LEVEL FALSE CACHE INTERNAL "Indicates if the project is top-level")
+    message(STATUS "Project is not top-level.")
+endif()
+
+
+# Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
+if(PROJECT_IS_TOP_LEVEL and ENABLE_TESTING)
+    message(STATUS "ALGLIB tests will be added.")
 
     # Enable testing for the project
     enable_testing()
@@ -65,8 +78,6 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
         # Print a status message
         message(STATUS "Test executable 'alglib_test_${ALGLIB_TEST_NAME}' has been added.")
     endforeach()
-else()
-    message(WARNING "CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are different. Skipping test setup.")
 endif()
 
 
@@ -84,7 +95,7 @@ else()
     )
 endif()
 
-install(DIRECTORY ${ALGLIB_INCLUDE_DIR}/ DESTINATION include)
+# install(DIRECTORY ${ALGLIB_INCLUDE_DIR}/ DESTINATION include)
 
 # Print project information
 message(STATUS "Building ALGLIB version: ${PROJECT_VERSION}")
