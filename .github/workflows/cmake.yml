@@ -3,7 +3,7 @@ name: Build and Release ALGLIB
 on:
   push:
     branches:
-      - main # Trigger on pushes to the main branch
+      - master # Trigger on pushes to the master branch
     tags:
       - "v*" # Trigger on version tags (e.g., v1.0.0)
 
