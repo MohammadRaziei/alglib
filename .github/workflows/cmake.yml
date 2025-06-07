@@ -29,22 +29,19 @@ jobs:
       # Step 3: Configure CMake
       - name: Configure CMake
         run: |
-          mkdir build && cd build
           if [[ "${{ matrix.library_type }}" == "shared" ]]; then
-            cmake .. -DALGLIB_SHARED_LIBRARY=ON
+            cmake .. -B build -DALGLIB_SHARED_LIBRARY=ON
           else
-            cmake .. -DALGLIB_STATIC_LIBRARY=ON
+            cmake .. -B build -DALGLIB_STATIC_LIBRARY=ON
           fi
 
       # Step 4: Build the project
       - name: Build project
-        working-directory: build
-        run: cmake --build . --config Release
+        run: cmake --build build --config Release
 
       # Step 5: Install the project
       - name: Install project
-        working-directory: build
-        run: cmake --install . --prefix install
+        run: cmake --install build --prefix install
 
       # Step 6: Zip the installed files
       - name: Create ZIP archive
