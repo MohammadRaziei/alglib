@@ -48,9 +48,12 @@ jobs:
 
       # Step 6: Zip the installed files
       - name: Create ZIP archive
-        run: |
-            zip -r alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip .
-        shell: bash # Use bash for Linux/macOS
+        uses: vimtor/action-zip@v1.2
+        with:
+            files: build/install
+            recursive: true
+            dest: alglib-${{ matrix.os }}-${{ matrix.library_type }}.zip 
+
 
       # Step 7: Upload artifact
       - name: Upload artifact
