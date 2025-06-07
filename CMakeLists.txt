@@ -79,20 +79,16 @@ if(PROJECT_IS_TOP_LEVEL AND ENABLE_TESTING)
     endforeach()
 endif()
 
-
 # Install targets
-if (DEFINED ALGLIB_SHARED_LIBRARY)
-    install(TARGETS alglib
-        LIBRARY DESTINATION lib
-        RUNTIME DESTINATION bin
-        INCLUDES DESTINATION include
-    )
-else()
-    install(TARGETS alglib
-        ARCHIVE DESTINATION lib
-        INCLUDES DESTINATION include
-    )
-endif()
+install(TARGETS alglib
+    LIBRARY DESTINATION libs  # For shared libraries (.so, .dll)
+    ARCHIVE DESTINATION libs  # For static libraries (.a, .lib)
+    RUNTIME DESTINATION libs  # For executables on Windows (.dll)
+)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION includes
+    FILES_MATCHING PATTERN "*.h"
+)
+
 
 # install(DIRECTORY ${ALGLIB_INCLUDE_DIR}/ DESTINATION include)
 
