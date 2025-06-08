@@ -30,11 +30,7 @@ jobs:
       # Step 3: Configure CMake
       - name: Configure CMake
         run: |
-          if [[ "${{ matrix.library_type }}" == "shared" ]]; then
-            cmake . -B build -DALGLIB_SHARED_LIBRARY=ON -DENABLE_TESTING=OFF
-          else
-            cmake . -B build -DALGLIB_STATIC_LIBRARY=ON -DENABLE_TESTING=OFF
-          fi
+          cmake . -B build -DBUILD_SHARED_LIBS=$(if [[ "${{ matrix.library_type }}" == "shared" ]]; then echo "ON"; else echo "OFF"; fi) -DENABLE_TESTING=OFF
         shell: bash # Use bash for all platforms
 
 

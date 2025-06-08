@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 option(ENABLE_TESTING "Enable testing for the project" ON)
+option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" OFF)
 
 # Define the project name, version, and language
 project(ALGLIB VERSION 4.0.4 LANGUAGES CXX)
@@ -19,21 +20,23 @@ set(ALGLIB_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 file(GLOB ALGLIB_SOURCES "${ALGLIB_SOURCE_DIR}/*.cpp")
 file(GLOB ALGLIB_HEADERS "${ALGLIB_INCLUDE_DIR}/*.h")
 
-# Create a static library target
-if (DEFINED ALGLIB_SHARED_LIBRARY)
-    add_library(alglib SHARED ${ALGLIB_SOURCES})
-else()
-    set(ALGELIB_STATIC_LIBRARY)
-    add_library(alglib STATIC ${ALGLIB_SOURCES})
-endif()  
+
+
+add_library(alglib ${ALGLIB_SOURCES})
+
+
 
 target_include_directories(alglib PUBLIC ${ALGLIB_INCLUDE_DIR})
 # Define the required macro based on the operating system
 if(WIN32)
-    target_compile_definitions(alglib PRIVATE AE_OS=AE_WINDOWS)
+    set(ALGLIB_AE_OS WINDOWS)
 else()
-    target_compile_definitions(alglib PRIVATE AE_OS=AEـPOSIX)
+    set(ALGLIB_AE_OS POSIX)
 endif()
+message(STATUS "ALGLIB_AE_OS: ${ALGLIB_AE_OS}")
+
+
+target_compile_definitions(alglib PRIVATE AE_OS=AE_${ALGLIB_AE_OS})
 
 
 # Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
@@ -69,11 +72,7 @@ if(PROJECT_IS_TOP_LEVEL AND ENABLE_TESTING)
         target_link_libraries(alglib_test_${ALGLIB_TEST_NAME} PRIVATE alglib)
 
         # Define the required macro based on the operating system
-        if(WIN32)
-            target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4WINDOWS)
-        else()
-            target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4POSIX)
-        endif()
+        target_compile_definitions(alglib_test_${ALGLIB_TEST_NAME} PRIVATE AE_DEBUG4${ALGLIB_AE_OS})
 
         # Register the test with CTest
         add_test(
@@ -95,6 +94,17 @@ install(TARGETS alglib
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION includes
     FILES_MATCHING PATTERN "*.h"
 )
+
+# configure_file(
+#     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ALGLIBConfig.cmake.in"
+#     "${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake"
+#     @ONLY
+# )
+
+# install(FILES
+#     "${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake"
+#     DESTINATION .
+# )
 
 
 # install(DIRECTORY ${ALGLIB_INCLUDE_DIR}/ DESTINATION include)
