@@ -29,8 +29,4 @@ set_target_properties(alglib PROPERTIES
 set(ALGLIB_BUILD_SHARED_LIBS @BUILD_SHARED_LIBS@)
 
 # Define the operating system macro
-if(WIN32)
-    target_compile_definitions(alglib INTERFACE AE_OS=AE_WINDOWS)
-else()
-    target_compile_definitions(alglib INTERFACE AE_OS=AE_POSIX)
-endif()
+target_compile_definitions(alglib INTERFACE AE_OS=AE_@ALGLIB_AE_OS@)
