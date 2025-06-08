@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 option(ENABLE_TESTING "Enable testing for the project" ON)
-option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" OFF)
+option(BUILD_SHARED_LIBS "Build using shared libraries" oFF)
 
 # Define the project name, version, and language
 project(ALGLIB VERSION 4.0.4 LANGUAGES CXX)
@@ -95,16 +95,16 @@ install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION includes
     FILES_MATCHING PATTERN "*.h"
 )
 
-# configure_file(
-#     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ALGLIBConfig.cmake.in"
-#     "${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake"
-#     @ONLY
-# )
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ALGLIBConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake
+    @ONLY
+)
 
-# install(FILES
-#     "${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake"
-#     DESTINATION .
-# )
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake
+    DESTINATION .
+)
 
 
 # install(DIRECTORY ${ALGLIB_INCLUDE_DIR}/ DESTINATION include)

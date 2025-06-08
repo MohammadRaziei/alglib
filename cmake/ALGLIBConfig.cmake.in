@@ -1,0 +1,36 @@
+@PACKAGE_INIT@
+
+# Include directories
+set(ALGLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/includes)
+# Library directories
+set(ALGLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/libs)
+
+# Find the ALGLIB library automatically
+find_library(ALGLIB_LIBRARIES
+    NAMES alglib
+    PATHS ${ALGLIB_LIBRARY_DIRS}
+    NO_DEFAULT_PATH
+)
+
+if(NOT ALGLIB_LIBRARIES)
+    message(FATAL_ERROR "ALGLIB library not found in ${ALGLIB_LIBRARY_DIRS}")
+endif()
+
+message(STATUS "ALGLIB libraries: ${ALGLIB_LIBRARIES}")
+
+# Add imported target
+add_library(alglib UNKNOWN IMPORTED)
+
+set_target_properties(alglib PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES ${ALGLIB_INCLUDE_DIRS}
+    IMPORTED_LOCATION ${ALGLIB_LIBRARIES}
+)
+
+set(ALGLIB_BUILD_SHARED_LIBS @BUILD_SHARED_LIBS@)
+
+# Define the operating system macro
+if(WIN32)
+    target_compile_definitions(alglib INTERFACE AE_OS=AE_WINDOWS)
+else()
+    target_compile_definitions(alglib INTERFACE AE_OS=AE_POSIX)
+endif()
