@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 option(ENABLE_TESTING "Enable testing for the project" ON)
-option(BUILD_SHARED_LIBS "Build using shared libraries" oFF)
+option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
 # Define the project name, version, and language
 project(ALGLIB VERSION 4.0.4 LANGUAGES CXX)
