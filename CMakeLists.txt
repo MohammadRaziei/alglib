@@ -33,8 +33,6 @@ if(WIN32)
 else()
     set(ALGLIB_AE_OS POSIX)
 endif()
-message(STATUS "ALGLIB_AE_OS: ${ALGLIB_AE_OS}")
-
 
 target_compile_definitions(alglib PRIVATE AE_OS=AE_${ALGLIB_AE_OS})
 
@@ -94,6 +92,13 @@ install(TARGETS alglib
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION includes
     FILES_MATCHING PATTERN "*.h"
 )
+
+include(cmake/utils.cmake)
+
+
+generate_library_name(alglib ${BUILD_SHARED_LIBS} ALGLIB_LIB_NAME)
+
+message(STATUS ${ALGLIB_LIB_NAME})
 
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ALGLIBConfig.cmake.in
