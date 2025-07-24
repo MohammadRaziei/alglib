@@ -98,8 +98,6 @@ include(cmake/utils.cmake)
 
 generate_library_name(alglib ${BUILD_SHARED_LIBS} ALGLIB_LIB_NAME)
 
-message(STATUS ${ALGLIB_LIB_NAME})
-
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ALGLIBConfig.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/ALGLIBConfig.cmake
