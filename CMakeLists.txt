@@ -40,16 +40,15 @@ target_compile_definitions(alglib PRIVATE AE_OS=AE_${ALGLIB_AE_OS})
 # Check if CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR are the same
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
     # Set a variable to indicate that the project is top-level
-    set(PROJECT_IS_TOP_LEVEL TRUE CACHE INTERNAL "Indicates if the project is top-level")
-    message(STATUS "Project is top-level.")
+    set(ALGLIB_PROJECT_IS_TOP_LEVEL TRUE CACHE INTERNAL "Indicates if the project is top-level")
+    message(STATUS "ALGLIB Project is top-level.")
 else()
     # Set a variable to indicate that the project is not top-level
-    set(PROJECT_IS_TOP_LEVEL FALSE CACHE INTERNAL "Indicates if the project is top-level")
-    message(STATUS "Project is not top-level.")
+    set(ALGLIB_PROJECT_IS_TOP_LEVEL FALSE CACHE INTERNAL "Indicates if the project is top-level")
 endif()
 
 
-if(PROJECT_IS_TOP_LEVEL AND ENABLE_TESTING)
+if(ALGLIB_PROJECT_IS_TOP_LEVEL AND ENABLE_TESTING)
     message(STATUS "ALGLIB tests will be added.")
 
     # Enable testing for the project
