@@ -69,7 +69,7 @@ This distribution maintains ALGLIB's original licensing terms:
 ## Website
 
 Full project details:  
-[https://mohammadraziei.github.io/ALGLIB](https://mohammadraziei.github.io/alglib)
+[https://mohammadraziei.github.io/alglib](https://mohammadraziei.github.io/alglib)
 
 ## Disclaimer
 
